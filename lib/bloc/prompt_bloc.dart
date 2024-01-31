@@ -13,6 +13,7 @@ class PromptBloc extends Bloc<PromptEvent, PromptState> {
     on<PromptInitialEvent>(
       (event, emit) async {
         try {
+          //!
           final ByteData bytes = await rootBundle.load('assets/best.png');
           final Uint8List list = bytes.buffer.asUint8List();
 
@@ -24,7 +25,8 @@ class PromptBloc extends Bloc<PromptEvent, PromptState> {
     );
     on<PromptEnteredEvent>((event, emit) async {
       emit(PromptGeneratingImageLoadState());
-      Uint8List? uint8List = await PromptRepo.generateImage(event.prompt);
+      Uint8List? uint8List =
+          await PromptRepo.generateImage(event.prompt, event.image);
       print(uint8List.toString());
       if (uint8List != null) {
         try {

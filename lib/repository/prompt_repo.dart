@@ -3,24 +3,29 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'dart:io';
+import 'package:image/image.dart' as img;
 
 class PromptRepo {
-  static Future<Uint8List?> generateImage(String prompt) async {
+  static Future<Uint8List?> generateImage(
+      String prompt, Uint8List image) async {
     final dio = Dio();
-    String url = 'https://api.vyro.ai/v1/imagine/api/generations';
-    //String url = 'https://api.vyro.ai/v1/imagine/api/edits/remix';
+
+    // String url = 'https://api.vyro.ai/v1/imagine/api/generations';
+    String url = 'https://api.vyro.ai/v1/imagine/api/edits/remix';
     dio.options = BaseOptions(headers: {
       'Authorization':
           'Bearer vk-4pBaOfr5qy4uJqvpM1U5Bg232Vc206DMBBu6ONKJ4mEIEk',
     }, responseType: ResponseType.bytes);
 
+    final imageUploaded = MultipartFile.fromBytes(image, filename: 'best.png');
+
     Map<String, dynamic> data = {
       //'futuristic player soccer, robotic shape, eight legs, color red'
       'prompt': prompt,
-      //'image': image,
+      'image': imageUploaded,
       "style_id": "21",
       "cfg": "3",
       "steps": "30",

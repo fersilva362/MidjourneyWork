@@ -1,6 +1,7 @@
+import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
-
+import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/bloc/prompt_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,9 +39,7 @@ class _ScreenPromptState extends State<ScreenPrompt> {
         ),
         body: BlocConsumer<PromptBloc, PromptState>(
           bloc: promptBloc,
-          listener: (context, state) {
-            // TODO: implement listener
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             switch (state.runtimeType) {
               case PromptGeneratingImageLoadState:
@@ -50,7 +49,6 @@ class _ScreenPromptState extends State<ScreenPrompt> {
               case PromptGeneratingImageSuccessState:
                 final stateSuccess = state as PromptGeneratingImageSuccessState;
                 Uint8List data = stateSuccess.uint8list;
-
                 return Column(
                   children: [
                     Expanded(
@@ -72,7 +70,10 @@ class _ScreenPromptState extends State<ScreenPrompt> {
                           ElevatedButton(
                               onPressed: () {
                                 promptBloc.add(
-                                  PromptEnteredEvent(prompt: controller.text),
+                                  PromptEnteredEvent(
+                                    prompt: controller.text,
+                                    image: data,
+                                  ),
                                 );
                               },
                               child: const Text('Generate'))

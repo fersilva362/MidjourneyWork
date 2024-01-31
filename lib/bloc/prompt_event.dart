@@ -5,8 +5,9 @@ sealed class PromptEvent {}
 
 class PromptEnteredEvent extends PromptEvent {
   final String prompt;
+  final Uint8List image;
 
-  PromptEnteredEvent({required this.prompt});
+  PromptEnteredEvent({required this.image, required this.prompt});
 }
 
 class PromptInitialEvent extends PromptEvent {}
