@@ -11,3 +11,9 @@ class PromptEnteredEvent extends PromptEvent {
 }
 
 class PromptInitialEvent extends PromptEvent {}
+
+class PromptUploadedEvent extends PromptEvent {
+  final Uint8List image;
+
+  PromptUploadedEvent({required this.image});
+}

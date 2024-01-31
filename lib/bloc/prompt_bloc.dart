@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/repository/prompt_repo.dart';
@@ -19,7 +16,7 @@ class PromptBloc extends Bloc<PromptEvent, PromptState> {
 
           emit(PromptGeneratingImageSuccessState(uint8list: list));
         } catch (e) {
-          print('error PromptInitialEvent ');
+          rethrow;
         }
       },
     );
@@ -27,18 +24,19 @@ class PromptBloc extends Bloc<PromptEvent, PromptState> {
       emit(PromptGeneratingImageLoadState());
       Uint8List? uint8List =
           await PromptRepo.generateImage(event.prompt, event.image);
-      print(uint8List.toString());
+
       if (uint8List != null) {
         try {
           emit(PromptGeneratingImageSuccessState(uint8list: uint8List));
         } catch (e) {
-          print(' error PromptEnteredEvent');
           emit(PromptGeneratingImageErrorState());
         }
       } else {
         emit(PromptGeneratingImageErrorState());
-        print('error in try/catch of PromptEnteredEvent');
       }
+    });
+    on<PromptUploadedEvent>((event, emit) {
+      emit(PromptGeneratingImageSuccessState(uint8list: event.image));
     });
   }
 }

@@ -1,12 +1,8 @@
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
-import 'package:flutter/widgets.dart';
-import 'dart:io';
-import 'package:image/image.dart' as img;
 
 class PromptRepo {
   static Future<Uint8List?> generateImage(
