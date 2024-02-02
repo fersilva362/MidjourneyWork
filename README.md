@@ -8,10 +8,10 @@ The idea is to integrate AI image generato to [Flutter](https://flutter.dev/), a
 The flutter version implementes the MVC architecture design pattern and [Bloc](https://bloclibrary.dev/#/) for the state management.
 ## This is the link to the Flutter Web version: [HayEquipoFL](https://silver-dasik-467ca5.netlify.app)
 
-### This a video of Mobile version : 
+### This a video of Mobile version : [video](https://github.com/fersilva362/MidjourneyWork/assets/78646102/5751f1ae-e7a3-4a04-bb5a-0abd0bfca0b0)
 
 
-https://github.com/fersilva362/MidjourneyWork/assets/78646102/5751f1ae-e7a3-4a04-bb5a-0abd0bfca0b0
+
 
 
 ### This is the link to the code: [GitHubFL](https://github.com/fersilva362/MidjourneyWork)
