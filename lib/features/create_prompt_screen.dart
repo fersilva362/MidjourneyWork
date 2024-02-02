@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, avoid_print
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,6 @@ class _ScreenPromptState extends State<ScreenPrompt> {
       };
 
       var formData = FormData.fromMap(data);
-      print(formData);
 
       Response response = await dio.post(url, data: formData);
       if (response.statusCode == 200) {
@@ -115,7 +114,7 @@ class _ScreenPromptState extends State<ScreenPrompt> {
                 Uint8List data = stateSuccess.uint8list;
 
                 return Center(
-                  child: Container(
+                  child: SizedBox(
                     /* margin: const EdgeInsets.only(right: 10, left: 10), */
                     width: (widthScreen > 500) ? 500 : double.maxFinite,
                     child: Column(
@@ -132,7 +131,7 @@ class _ScreenPromptState extends State<ScreenPrompt> {
                         const SizedBox(
                           height: 10,
                         ), //Button upload image
-                        Container(
+                        SizedBox(
                           height: 40,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -230,7 +229,8 @@ class _ScreenPromptState extends State<ScreenPrompt> {
                                 height: 10,
                               ),
                               TextField(
-                                cursorColor: Color.fromRGBO(172, 125, 248, 1),
+                                cursorColor:
+                                    const Color.fromRGBO(172, 125, 248, 1),
                                 decoration: const InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
