@@ -54,9 +54,13 @@ class _ScreenPromptState extends State<ScreenPrompt> {
       }
     }
 
+    final widthScreen = MediaQuery.of(context).size.width;
+    print(widthScreen);
+
     return Scaffold(
         appBar: AppBar(
-          title: const Text('MidJourney'),
+          title: const Text('My AI Journey Work'),
+          centerTitle: true,
         ),
         body: BlocConsumer<PromptBloc, PromptState>(
           bloc: promptBloc,
@@ -65,7 +69,7 @@ class _ScreenPromptState extends State<ScreenPrompt> {
             switch (state.runtimeType) {
               // Loading State
               case PromptGeneratingImageLoadState:
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               //error State
               case PromptGeneratingImageErrorState:
                 return const Center(child: Text('Something went wrong'));
@@ -73,50 +77,143 @@ class _ScreenPromptState extends State<ScreenPrompt> {
               case PromptGeneratingImageSuccessState:
                 final stateSuccess = state as PromptGeneratingImageSuccessState;
                 Uint8List data = stateSuccess.uint8list;
-                return Column(
-                  children: [
-                    //Image display-box
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: MemoryImage(data), fit: BoxFit.contain),
+
+                return Center(
+                  child: Container(
+                    /* margin: const EdgeInsets.only(right: 10, left: 10), */
+                    width: (widthScreen > 500) ? 500 : double.maxFinite,
+                    child: Column(
+                      children: [
+                        //Image display-box
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: MemoryImage(data), fit: BoxFit.fill),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          //Button upload image
-                          ElevatedButton(
-                            onPressed: () {
-                              _imagePicker();
-                            },
-                            child: const Text('Upload image'),
-                          ),
-
-                          //Text field
-                          TextField(
-                            controller: controller,
-                          ),
-                          // Button Generate
-                          ElevatedButton(
-                            onPressed: () {
-                              promptBloc.add(
-                                PromptEnteredEvent(
-                                  prompt: controller.text,
-                                  image: data,
+                        const SizedBox(
+                          height: 10,
+                        ), //Button upload image
+                        Container(
+                          height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {
+                                  _imagePicker();
+                                },
+                                icon: const Icon(
+                                  Icons.image_outlined,
+                                  color: Colors.white,
                                 ),
-                              );
-                            },
-                            child: const Text('Generate'),
+                                label: const Text(
+                                  'My Image',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              const VerticalDivider(
+                                color: Color.fromRGBO(59, 61, 83, 1),
+                                thickness: 1,
+                              ),
+                              TextButton.icon(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.save_alt_outlined,
+                                  color: Colors.white,
+                                ),
+                                label: const Text(
+                                  'save',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  ],
+                        ),
+                        const Divider(
+                          color: Color.fromRGBO(59, 61, 83, 1),
+                        ),
+
+                        Container(
+                          height: 200,
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  if (controller.text.isNotEmpty) {
+                                    promptBloc.add(
+                                      PromptEnteredEvent(
+                                        prompt: controller.text,
+                                        image: data,
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                            colors: [
+                                              Color.fromRGBO(91, 105, 225, 1),
+                                              Color.fromRGBO(172, 125, 248, 1)
+                                            ]),
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
+                                    height: 35,
+                                    width: double.maxFinite,
+                                    padding: const EdgeInsets.all(8),
+                                    child: const Center(
+                                      child: Text(
+                                        'Generate',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              //Text field
+
+                              const Text(
+                                'Enter prompt of your imagination',
+                                style: TextStyle(
+                                  color: Color.fromRGBO(143, 149, 167, 1),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                cursorColor: Color.fromRGBO(172, 125, 248, 1),
+                                decoration: const InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color.fromRGBO(
+                                                172, 125, 248, 1))),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)))),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                                maxLines: 2,
+                                controller: controller,
+                              ),
+                              // Button Generate
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 );
               default:
                 return const Center(

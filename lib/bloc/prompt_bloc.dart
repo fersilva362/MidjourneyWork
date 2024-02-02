@@ -11,7 +11,7 @@ class PromptBloc extends Bloc<PromptEvent, PromptState> {
       (event, emit) async {
         try {
           //!
-          final ByteData bytes = await rootBundle.load('assets/best.png');
+          final ByteData bytes = await rootBundle.load('assets/peakpx.jpg');
           final Uint8List list = bytes.buffer.asUint8List();
 
           emit(PromptGeneratingImageSuccessState(uint8list: list));

@@ -16,7 +16,8 @@ class PromptRepo {
           'Bearer vk-4pBaOfr5qy4uJqvpM1U5Bg232Vc206DMBBu6ONKJ4mEIEk',
     }, responseType: ResponseType.bytes);
 
-    final imageUploaded = MultipartFile.fromBytes(image, filename: 'best.png');
+    final imageUploaded =
+        MultipartFile.fromBytes(image, filename: 'peakpx.jpg');
 
     Map<String, dynamic> data = {
       //'futuristic player soccer, robotic shape, eight legs, color red'
