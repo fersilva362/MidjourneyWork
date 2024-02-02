@@ -17,3 +17,9 @@ class PromptUploadedEvent extends PromptEvent {
 
   PromptUploadedEvent({required this.image});
 }
+
+class PromptPostEvent extends PromptEvent {
+  final Uint8List uint8list;
+
+  PromptPostEvent({required this.uint8list});
+}

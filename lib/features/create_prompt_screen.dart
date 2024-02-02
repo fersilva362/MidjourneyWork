@@ -1,11 +1,14 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/bloc/prompt_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'dart:developer';
+import 'dart:typed_data';
+import 'package:dio/dio.dart';
 
 class ScreenPrompt extends StatefulWidget {
   const ScreenPrompt({super.key});
@@ -34,7 +37,40 @@ class _ScreenPromptState extends State<ScreenPrompt> {
 
   @override
   Widget build(BuildContext context) {
-//Function to upload images
+    //Function to post images to cloudinary
+    Future<void> _cloudinaryPost(Uint8List image) async {
+      final dio = Dio();
+
+      String url =
+          'https://api.cloudinary.com/v1_1/${dotenv.env['CLOUD_NAME']}/image/upload';
+
+      final imageUploaded =
+          MultipartFile.fromBytes(image, filename: 'peakpx.jpg');
+
+      Map<String, dynamic> data = {
+        'file': imageUploaded,
+        "upload_preset": dotenv.env['PRESET_NAME'],
+        "cloud_name": dotenv.env['CLOUD_NAME'],
+      };
+
+      var formData = FormData.fromMap(data);
+      print(formData);
+
+      Response response = await dio.post(url, data: formData);
+      if (response.statusCode == 200) {
+        log("Success: ${response.statusCode}");
+        try {
+          log('response: ${response.data}');
+          //!
+        } on Exception catch (e) {
+          log('error in repo ${e.toString()}');
+        }
+      } else {
+        log("Error in Repo: ${response.statusCode}");
+      }
+    }
+
+//Function to upload My images
     Future<void> _imagePicker() async {
       try {
         final ImagePicker _imagePicker = ImagePicker();
@@ -119,7 +155,9 @@ class _ScreenPromptState extends State<ScreenPrompt> {
                                 thickness: 1,
                               ),
                               TextButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _cloudinaryPost(data);
+                                },
                                 icon: const Icon(
                                   Icons.save_alt_outlined,
                                   color: Colors.white,

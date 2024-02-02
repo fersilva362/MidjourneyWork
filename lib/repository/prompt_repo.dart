@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PromptRepo {
   static Future<Uint8List?> generateImage(
@@ -12,8 +13,7 @@ class PromptRepo {
     // String url = 'https://api.vyro.ai/v1/imagine/api/generations';
     String url = 'https://api.vyro.ai/v1/imagine/api/edits/remix';
     dio.options = BaseOptions(headers: {
-      'Authorization':
-          'Bearer vk-4pBaOfr5qy4uJqvpM1U5Bg232Vc206DMBBu6ONKJ4mEIEk',
+      'Authorization': 'Bearer ${dotenv.env['API_KEY_MIDJOURNEY']}',
     }, responseType: ResponseType.bytes);
 
     final imageUploaded =
