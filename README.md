@@ -1,5 +1,5 @@
 # My AI Journey Work
-Hello! I would like to show a web and mobile app called **My AI Journey Work** that uses [ImagineAI] (https://www.imagine.art/) API endpoints to create photorealistic text-based AI art. indications. The project was inspired by a project that [Gonzalo Pozzo](https://links.gonzalopozzo.com/) had done a few weeks ago using [NextJS](https://nextjs.org/) and ReplicateAI.
+Hello! I would like to show a web and mobile app called **My AI Journey Work** that uses [ImagineAI] (https://www.imagine.art/) API endpoints to create photorealistic text-based AI art.  The project was inspired by a project that [Gonzalo Pozzo](https://links.gonzalopozzo.com/) had done a few weeks ago using [NextJS](https://nextjs.org/) and ReplicateAI.
 
 The idea is to integrate AI image generation into [Flutter](https://flutter.dev/) and create any image starting by using images as part of a message (text) to influence composition, style and colors . Text prompts are used with image prompts or can be used alone. Once an image is generated, it is stored in your [Cloudinary](https://cloudinary.com/) account as a resource.
 <br/>
