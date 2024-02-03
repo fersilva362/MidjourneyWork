@@ -6,10 +6,9 @@ The idea is to integrate AI image generation into [Flutter](https://flutter.dev/
 
 ![Flutter](https://img.shields.io/badge/Flutter-_-48c0f8?style=for-the-badge&logo=flutter&logoColor=5dccfc)<br/>
 The flutter version implementes the MVC architecture design pattern and [Bloc](https://bloclibrary.dev/#/) for the state management.
-## This is the link to the Flutter Web version: [HayEquipoFL](https://silver-dasik-467ca5.netlify.app)
+## This is the link to the Flutter Web version: [My AI Journey Work](https://boisterous-speculoos-39b07c.netlify.app/)
 ### This a video of Mobile version : 
-
-https://github.com/fersilva362/MidjourneyWork/assets/78646102/2cedfdb6-4330-4e94-961d-db47aa160f95
+https://github.com/fersilva362/MidjourneyWork/assets/78646102/b085446b-1be9-408c-898d-a2cfc65003b6
 ### This is the link of[GitHub code](https://github.com/fersilva362/MidjourneyWork) .
 
 
