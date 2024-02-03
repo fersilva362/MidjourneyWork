@@ -10,6 +10,6 @@ The flutter version implementes the MVC architecture design pattern and [Bloc](h
 ### This a video of Mobile version : 
 
 https://github.com/fersilva362/MidjourneyWork/assets/78646102/2cedfdb6-4330-4e94-961d-db47aa160f95
-### This is the link to the code: [GitHubFL](https://github.com/fersilva362/MidjourneyWork)
+### This is the link of[GitHub code](https://github.com/fersilva362/MidjourneyWork) .
 
 
